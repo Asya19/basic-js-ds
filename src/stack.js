@@ -12,22 +12,47 @@ const { NotImplementedError } = require('../extensions/index.js');
  * stack.pop(); // undefined
  *
  */
+
+class Node {
+  constructor(element, prev) {
+    this.element = element;
+    this.prev = prev; // ссылка на следующий элемент списка
+  }
+}
+
 class Stack {
-  push(/* element */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  constructor() {
+    this.last = null; // ссылка на последний узел списка
+  }
+
+  push(element) {
+    // теперь ссылка на последний узел указывает на новый узел
+    this.last = new Node(element, this.last);
   }
 
   pop() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    let res;
+    // если список не пуст
+    if (this.last !== null) { 
+      res = this.last.element; // получаем последний узел
+      this.last = this.last.prev; // сдвигаем указатель на предыдущий элемент
+    }
+    return res; // возразщаем удаленный элемент
   }
 
   peek() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    return this.last.element; // возразщаем последний элемент
   }
 }
+// const stack = new Stack();
+
+// console.log(stack);
+// stack.push(1);
+// stack.push(4);
+// console.log(stack);
+
+// console.log(stack.pop());
+// console.log(stack.peek());
 
 module.exports = {
   Stack
